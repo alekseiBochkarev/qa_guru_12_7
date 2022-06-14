@@ -33,10 +33,10 @@ public class SelenideAllureTest extends BaseSetup {
     public static final String ISSUENUMBER = "#3";
 
     @BeforeEach
-    void openPage () {
-        step ("открываем главную страницу", () -> {
+    void openPage() {
+        step("открываем главную страницу", () -> {
             startPage.openPage();
-                });
+        });
     }
 
     @Test
@@ -46,7 +46,7 @@ public class SelenideAllureTest extends BaseSetup {
     @Story("Просмотр задач в репозитории")
     @DisplayName("Мой любимый тест")
     @Link(value = "репозиторий с тестом", url = "https://github.com/alekseiBochkarev/qa_guru_12_7")
-    void githubIssueListenerTest () {
+    void githubIssueListenerTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         startPage.searchValue("alekseiBochkarev/junit-lesson-project");
         searchPage.linkedTextClick("alekseiBochkarev/junit-lesson-project");
@@ -62,7 +62,7 @@ public class SelenideAllureTest extends BaseSetup {
 
     @Test
     @IssueShow
-    void githubIssueStepTest () {
+    void githubIssueStepTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         step("Ищем репозиторий " + REPOSITORY, () -> {
             startPage.searchValue(REPOSITORY);
@@ -82,7 +82,7 @@ public class SelenideAllureTest extends BaseSetup {
 
     @Test
     @IssueShow
-    void githubIssueWebSteps () {
+    void githubIssueWebSteps() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         WebSteps steps = new WebSteps();
 
@@ -92,8 +92,8 @@ public class SelenideAllureTest extends BaseSetup {
         steps.issueNumberCheck(ISSUENUMBER);
     }
 
-    @Attachment (value = "мой супер скриншот", type = "image/png", fileExtension = "png")
-    public byte[] attachScreenshot () {
+    @Attachment(value = "мой супер скриншот", type = "image/png", fileExtension = "png")
+    public byte[] attachScreenshot() {
         return ((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
@@ -106,7 +106,7 @@ public class SelenideAllureTest extends BaseSetup {
     }
 
     @Test
-    void testCode () {
+    void testCode() {
         Allure.label("owner", "abochkarev");
         Allure.label("severity", SeverityLevel.CRITICAL.value());
         Allure.feature("new tasks");
@@ -115,7 +115,7 @@ public class SelenideAllureTest extends BaseSetup {
     }
 
     @Test
-    void annotatedTest () {
+    void annotatedTest() {
         Allure.feature("new tasks");
         Allure.story("annotateParameter story");
         Allure.parameter("Регион", "Московская область");
@@ -126,10 +126,10 @@ public class SelenideAllureTest extends BaseSetup {
             "firstValue, firstExpected",
             "secondValue, secondExpected"
     })
-    @ParameterizedTest(name ="Проверяем {0} Ожидаем {1}")
+    @ParameterizedTest(name = "Проверяем {0} Ожидаем {1}")
     @Feature("new tasks")
     @Story("parameteredTest and parametered annotation")
-    void parameterTest (String testData, String expectedResult) {
+    void parameterTest(String testData, String expectedResult) {
         Allure.parameter(testData, expectedResult);
     }
 }
